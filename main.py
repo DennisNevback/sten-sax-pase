@@ -6,14 +6,14 @@ player2_move = ''
 
 def restart():
     global playing
-    game_state = input('Would you like to play again? (Y/N)')
-    game_state = game_state.upper()
-    if game_state == 'N':
+    game_restart = input('Would you like to play again? (Y/N)')
+    game_restart = game_restart.upper()
+    if game_restart == 'N':
         playing = False
         print('Thank you for playing!')
 
 
-def game_loop():
+def check_win():
     if player1_move == 'R' and player2_move == 'R':
         print('it\'s a tie! Another round!')
     elif player1_move == 'R' and player2_move == 'S':
@@ -54,4 +54,4 @@ while playing:
             print('Please input either R, P Or S\n Game restarting')
 
         else:
-            game_loop()
+            check_win()
