@@ -52,6 +52,5 @@ while playing:
         player2_move = player2_move.upper()
         if not re.match('^[RPS]$', player2_move):
             print('Please input either R, P Or S\n Game restarting')
-
         else:
             check_win()
