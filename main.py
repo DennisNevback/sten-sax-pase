@@ -6,9 +6,9 @@ player2_move = ''
 
 def restart():
     global playing
-    game_restart = input('Would you like to play again? (Y/N)')
+    game_restart = input('Would you like to play again? (Y/N)\n')
     game_restart = game_restart.upper()
-    if game_restart == 'N':
+    if re.match('^[N]', game_restart):
         playing = False
         print('Thank you for playing!')
 
@@ -42,15 +42,15 @@ def check_win():
 
 while playing:
     player1_move = input(
-        'Player one please choose - Rock(R), Paper(P) or Scissor(S)?\n')
+        'Player one please choose - Rock(R), Paper(P) or Scissors(S)?\n')
     player1_move = player1_move.upper()
     if not re.match('^[RPS]$', player1_move):
-        print('Please input either R, P Or S')
+        print('Please input either R, P or S')
     else:
         player2_move = input(
-            'Player two please choose - Rock(R), Paper(P) or Scissor(S)?\n')
+            'Player two please choose - Rock(R), Paper(P) or Scissors(S)?\n')
         player2_move = player2_move.upper()
         if not re.match('^[RPS]$', player2_move):
-            print('Please input either R, P Or S\n Game restarting')
+            print('Please input either R, P or S\n Game restarting')
         else:
             check_win()
