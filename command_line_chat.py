@@ -54,19 +54,19 @@ def react_on_messages(timestamp, user, message):
         choices[user] = message
     if message == 'S':
         choices[user] = message
-    print(choices)
-    print(choices[user])
-    print(choices.values())
-    print(choices.get(1))
-    print(choices.get(0))
+    print(f'printar {choices}')
+    # print(choices[user])
+    # print(choices.values())
+    #print(f'testing choice{choices[0]}')
+    # print(choices[1])
     print("Choose rock(R), paper(P) or scissors(S) (just write one alternative)")
     print("or just wait for the other player if you have made your choice")
 
     # both players have chosen
     if len(choices) >= 2:
         # check who has won
-        print(choices[1])
-        check_win(choices[user], choices[1])
+        print('win method')
+        check_win(choices[user], choices[user])
         # then empty the dictionary choices
 
 
