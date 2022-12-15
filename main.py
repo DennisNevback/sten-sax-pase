@@ -1,8 +1,23 @@
 import re
+from threading import Thread
+from datetime import datetime
+from network import connect, send
 playing = True
 player1_move = ''
 player2_move = ''
 
+
+def timestamp_to_iso(timestamp):
+    return datetime.fromtimestamp(timestamp / 1000)\
+        .isoformat().replace('T', ' ').split('.')[0]
+
+def send_message():
+    while True:
+        send(input())
+
+def react_on_messages(timestamp, user, message):
+    time = timestamp_to_iso(timestamp)
+    print(f'\n{time} {user}\n{message}\n')
 
 def restart():
     global playing
@@ -11,7 +26,6 @@ def restart():
     if re.match('^[N]', game_restart):
         playing = False
         print('Thank you for playing!')
-
 
 def check_win():
     if player1_move == 'R' and player2_move == 'R':
@@ -40,6 +54,11 @@ def check_win():
         print('it\'s a tie! Another round!')
 
 
+user = input('Your name: ')
+channel = input('Channel to join or create: ')
+# connect to (or create) a channel, with a user name
+connect(channel, user, react_on_messages)
+
 while playing:
     player1_move = input(
         'Player one please choose - Rock(R), Paper(P) or Scissors(S)?\n')
@@ -54,3 +73,8 @@ while playing:
             print('Please input either R, P or S\n Game restarting')
         else:
             check_win()
+
+# start non-blocking thread to input and send messages
+Thread(target=send_message).start()
+
+
