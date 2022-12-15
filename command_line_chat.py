@@ -5,31 +5,18 @@ from network import connect, send
 choices = {}
 
 
-def check_win(player1_move, player2_move):
-    if player1_move == 'R' and player2_move == 'R':
-        print('it\'s a tie! Another round!')
-    elif player1_move == 'R' and player2_move == 'S':
-        print('Player one wins!')
+def check_win(dict):
+    if 'R' in list(dict.values()) and 'S' in list(dict.values()):
+        print(choices['R'])
         # restart()
-    elif player1_move == 'R' and player2_move == 'P':
-        print('Player two wins!')
+    if 'R' in list(dict.values()) and 'P' in list(dict.values()):
+        print(choices['P'])
         # restart()
-    elif player1_move == 'P' and player2_move == 'R':
-        print('Player one wins!')
+    if 'P' in list(dict.values()) and 'S' in list(dict.values()):
+        print(choices['R'])
         # restart()
-    elif player1_move == 'P' and player2_move == 'P':
-        print('it\'s a tie! Another round!')
-    elif player1_move == 'P' and player2_move == 'S':
-        print('Player two wins!')
-        # restart()
-    elif player1_move == 'S' and player2_move == 'R':
-        print('Player two wins!')
-        # restart()
-    elif player1_move == 'S' and player2_move == 'P':
-        print('Player one wins!')
-        # restart()
-    elif player1_move == 'S' and player2_move == 'S':
-        print('it\'s a tie! Another round!')
+    else:
+        print('It\'s a tie')
 
 # convert timestamp to iso date time format
 
@@ -54,7 +41,7 @@ def react_on_messages(timestamp, user, message):
         choices[user] = message
     if message == 'S':
         choices[user] = message
-    print(f'printar {choices}')
+    print(f'printar {choices[user]}')
     # print(choices[user])
     # print(choices.values())
     #print(f'testing choice{choices[0]}')
@@ -66,7 +53,7 @@ def react_on_messages(timestamp, user, message):
     if len(choices) >= 2:
         # check who has won
         print('win method')
-        check_win(choices[user], choices[user])
+        check_win(choices)
         # then empty the dictionary choices
 
 
