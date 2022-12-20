@@ -6,17 +6,27 @@ choices = {}
 
 
 def check_win(dict):
+    global choices
+    print('hit')
+    print(dict)
+    print(list(dict.values()))
     if 'R' in list(dict.values()) and 'S' in list(dict.values()):
-        print(choices['R'])
+        value = {i for i in dict if dict[i] == 'R'}
+        print(f'{value} has won!')
         # restart()
-    if 'R' in list(dict.values()) and 'P' in list(dict.values()):
-        print(choices['P'])
         # restart()
-    if 'P' in list(dict.values()) and 'S' in list(dict.values()):
-        print(choices['R'])
+    elif 'R' in list(dict.values()) and 'P' in list(dict.values()):
+        value = {i for i in dict if dict[i] == 'P'}
+        print(f'{value} has won!')
+        # restart()
+    elif 'P' in list(dict.values()) and 'S' in list(dict.values()):
+        value = {i for i in dict if dict[i] == 'S'}
+        print(f'{value} has won!')
         # restart()
     else:
         print('It\'s a tie')
+    choices.clear()
+    print('Game reset - input anew to play again (R,P or S)')
 
 # convert timestamp to iso date time format
 
@@ -34,18 +44,13 @@ def send_message():
 def react_on_messages(timestamp, user, message):
     global choices
     time = timestamp_to_iso(timestamp)
-    print(f'\n{time} {user}\n{message}\n')
+    print(f'\n{time} {user}\n')
     if message == 'P':
         choices[user] = message
     if message == 'R':
         choices[user] = message
     if message == 'S':
         choices[user] = message
-    print(f'printar {choices[user]}')
-    # print(choices[user])
-    # print(choices.values())
-    #print(f'testing choice{choices[0]}')
-    # print(choices[1])
     print("Choose rock(R), paper(P) or scissors(S) (just write one alternative)")
     print("or just wait for the other player if you have made your choice")
 
